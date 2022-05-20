@@ -1,0 +1,14 @@
+
+Installing Mediapipe on mac m1
+
+cd (main folder)
+
+python -m venv .venv
+source .venv/bin/activate
+
+arch -x86_64 pip install numpy
+arch -x86_64 pip install opencv-python
+arch -x86_64 pip install mediapipe
+
+
+arch -x86_64 python3

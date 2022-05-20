@@ -1,8 +1,7 @@
 import cv2
 import time
-from matplotlib import image
-import numpy as np
 import image_processing as ip
+import hand_tracking as ht
 
 cap = cv2.VideoCapture(1)
 
@@ -20,8 +19,10 @@ while True:
 
 
     # Our operations on the frame come here
+    # image = image_org
     # image = ip.face_detection(image_org)
     # image = ip.to_gray(image_org)
+    image = ht.hand_tracking(image_org)
 
 
 
