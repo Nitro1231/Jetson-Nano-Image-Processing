@@ -1,7 +1,7 @@
 import cv2
 import time
 import image_processing as ip
-import hand_tracking as ht
+import mediapipe_processing as mp
 
 cap = cv2.VideoCapture(1)
 
@@ -20,10 +20,16 @@ while True:
 
     # Our operations on the frame come here
     # image = image_org
-    # image = ip.face_detection(image_org)
-    # image = ip.to_gray(image_org)
-    image = ht.hand_tracking(image_org)
 
+    # image = ip.to_gray(image_org)
+    # image = ip.bgr2rgb(image_org)
+    # image = ip.face_detection(image_org)
+
+    # image = mp.face_detection_tracking(image_org)
+    image = mp.face_mesh_tracking(image_org)
+    image = mp.hands_tracking(image_org)
+    # image = mp.holistic_tracking(image_org)
+    # image = mp.object_detection(image_org)
 
 
     # FPS Counter
@@ -37,6 +43,7 @@ while True:
     cv2.imshow('image', image)
     if cv2.waitKey(1) == ord('q'):
         break
+
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()

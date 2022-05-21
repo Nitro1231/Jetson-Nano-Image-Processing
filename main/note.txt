@@ -9,6 +9,7 @@ source .venv/bin/activate
 arch -x86_64 pip install numpy
 arch -x86_64 pip install opencv-python
 arch -x86_64 pip install mediapipe
-
+arch -x86_64 pip install flask
+arch -x86_64 pip install responses
 
 arch -x86_64 python3
