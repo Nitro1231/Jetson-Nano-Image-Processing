@@ -10,6 +10,10 @@ def to_gray(image):
     return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
+def bgr2rgb(image):
+    return cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+
 def face_detection(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
