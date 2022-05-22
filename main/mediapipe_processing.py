@@ -11,11 +11,14 @@ mp_drawing_styles = mp.solutions.drawing_styles
 mp_face_detection = mp.solutions.face_detection
 face_detection = mp_face_detection.FaceDetection()
 
+mp_face_mesh = mp.solutions.face_mesh
+face_mesh = mp_face_mesh.FaceMesh()
+
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands()
 
-mp_face_mesh = mp.solutions.face_mesh
-face_mesh = mp_face_mesh.FaceMesh()
+mp_pose = mp.solutions.pose
+pose = mp_pose.Pose()
 
 mp_holistic = mp.solutions.holistic
 holistic = mp_holistic.Holistic()
@@ -62,21 +65,22 @@ def hands_tracking(image):
 def holistic_tracking(image):
     results = holistic.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
 
-    if results.face_landmarks or results.pose_landmarks:
+    if results.face_landmarks:
         mp_drawing.draw_landmarks(
             image,
             results.face_landmarks,
             mp_holistic.FACEMESH_CONTOURS,
             landmark_drawing_spec=None,
-            connection_drawing_spec=mp_drawing_styles
-            .get_default_face_mesh_contours_style())
+            connection_drawing_spec=mp_drawing_styles.get_default_face_mesh_contours_style()
+        )
 
+    if results.pose_landmarks:
         mp_drawing.draw_landmarks(
             image,
             results.pose_landmarks,
             mp_holistic.POSE_CONNECTIONS,
-            landmark_drawing_spec=mp_drawing_styles
-            .get_default_pose_landmarks_style())
+            landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
+        )
 
     return image
 
@@ -86,8 +90,23 @@ def object_detection(image):
     detected_objects = results.detected_objects
 
     if detected_objects:
-        for detected_object in results.detected_objects:
+        for detected_object in detected_objects:
             mp_drawing.draw_landmarks(image, detected_object.landmarks_2d, mp_objectron.BOX_CONNECTIONS)
             mp_drawing.draw_axis(image, detected_object.rotation, detected_object.translation)
+    
+    return image
+
+
+def pose_tracking(image):
+    results = pose.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    pose_landmarks = results.pose_landmarks
+
+    if pose_landmarks:
+        mp_drawing.draw_landmarks(
+            image,
+            pose_landmarks,
+            mp_pose.POSE_CONNECTIONS,
+            landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
+        )
     
     return image

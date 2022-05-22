@@ -1,5 +1,5 @@
 
-Installing Mediapipe on mac m1
+Installing Mediapipe on MacOS with M1:
 
 cd (main folder)
 
@@ -13,3 +13,8 @@ arch -x86_64 pip install flask
 arch -x86_64 pip install responses
 
 arch -x86_64 python3
+
+
+
+Installing Mediapipe on Jetson Nano:
+https://github.com/Melvinsajith/How-to-Install-Mediapipe-in-Jetson-Nano

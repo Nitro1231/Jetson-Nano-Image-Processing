@@ -9,8 +9,9 @@ if not cap.isOpened():
     print("Cannot open camera")
     exit()
 
-last_time = time.time()
+
 while True:
+    start_time = time.time()
     ret, image_org = cap.read()
 
     if not ret:
@@ -26,17 +27,16 @@ while True:
     # image = ip.face_detection(image_org)
 
     # image = mp.face_detection_tracking(image_org)
-    image = mp.face_mesh_tracking(image_org)
+    # image = mp.face_mesh_tracking(image_org)
     image = mp.hands_tracking(image_org)
     # image = mp.holistic_tracking(image_org)
     # image = mp.object_detection(image_org)
+    # image = mp.pose_tracking(image_org)
 
 
     # FPS Counter
-    current_time = time.time()
-    fps = 1 / (current_time - last_time)
-    last_time = current_time
-
+    end_time = time.time()
+    fps = 1 / (end_time - start_time)
     cv2.putText(image, f'FPS: {int(fps)}', (50, 50), cv2.FONT_HERSHEY_PLAIN, 3, (161, 252, 3), 3)
 
     # Display the resulting frame

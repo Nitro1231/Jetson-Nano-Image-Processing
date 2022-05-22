@@ -27,6 +27,7 @@ def encode_video():
         current_time = time.time()
         image_org = get_image()
 
+        # Our operations on the frame come here
         # image = image_org
 
         # image = ip.to_gray(image_org)
@@ -34,10 +35,11 @@ def encode_video():
         # image = ip.face_detection(image_org)
 
         # image = mp.face_detection_tracking(image_org)
-        image = mp.face_mesh_tracking(image_org)
-        image = mp.hands_tracking(image_org)
+        # image = mp.face_mesh_tracking(image_org)
+        # image = mp.hands_tracking(image_org)
         # image = mp.holistic_tracking(image_org)
         # image = mp.object_detection(image_org)
+        image = mp.pose_tracking(image_org)
 
 
         # FPS Counter
